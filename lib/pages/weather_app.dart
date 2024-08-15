@@ -38,7 +38,7 @@ class WeatherPage extends StatefulWidget {
 }
 
 class _WeatherPageState extends State<WeatherPage> {
-  final String apiKey = 'fa3242d6725f427095b144358240908';
+  final String apiKey = '07b56f1ab3304d3da74105907241508';
   String location = 'Colombo';
   late TextEditingController _locationController;
   int temperature = 0;

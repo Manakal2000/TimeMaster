@@ -110,7 +110,7 @@ class _MyHomePageState extends State<CalendarScreen> {
       _isLoadingWeather = true;
     });
 
-    final apiKey = 'fa3242d6725f427095b144358240908';
+    final apiKey = '07b56f1ab3304d3da74105907241508';
     final location = _locationController.text;
     final selectedDate = _selectedDate!;
 
