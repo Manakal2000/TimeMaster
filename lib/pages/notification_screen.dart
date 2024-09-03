@@ -74,7 +74,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       );
                     } else if (weatherSnapshot.hasError) {
                       print("Weather API Error: ${weatherSnapshot.error}");
-                      return ListTile(
+                      return const ListTile(
                         title: Text('Error: Failed to fetch weather.'),
                       );
                     } else {
@@ -98,8 +98,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
       return "Location not available";
     }
 
+    // Normalize dates to ignore time differences and only focus on the day count
+    final today = DateTime.now();
+    final targetDate = DateTime(date.year, date.month, date.day); // Only date, ignore time
+    final normalizedToday = DateTime(today.year, today.month, today.day); // Only date, ignore time
+
     // Get the number of days from today
-    final daysFromToday = date.difference(DateTime.now()).inDays;
+    final daysFromToday = targetDate.difference(normalizedToday).inDays;
 
     // Ensure the date is within the range of forecast data (usually up to 10 days)
     if (daysFromToday < 0 || daysFromToday > 10) {
@@ -114,6 +119,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
+        // Use the correct index for the forecast day
         final forecastDay = jsonData['forecast']['forecastday'][daysFromToday];
         final condition = forecastDay['day']['condition']['text'];
         return condition;
